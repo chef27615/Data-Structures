@@ -20,7 +20,17 @@ class TextBuffer:
         return s
 
     def append(self, string_to_add):
-        pass
+        new_node = TextBuffer(string_to_add)
+        self.length += 1 
+        if not self.head and not self.tail:
+            self.head = new_node
+            self.tail = new_node 
+        
+        else:
+            self.head.prev = new_node
+            new_node.next = self.head
+            self.head = new_node
+
     
     def prepend(self, string_to_add):
         # reverse the incoming string to maintain correct 
