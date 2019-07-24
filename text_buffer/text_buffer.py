@@ -8,8 +8,9 @@ class TextBuffer:
         # check if an init string is provided
         # if so, put the contents of the init string in self.contents
         if init:
-            pass
-
+            for i in init:
+                self.contents.add_to_tail(i) 
+            
     def __str__(self):
         # needs to return a string to print 
         s = ""
@@ -20,28 +21,26 @@ class TextBuffer:
         return s
 
     def append(self, string_to_add):
-        new_node = TextBuffer(string_to_add)
-        self.length += 1 
-        if not self.head and not self.tail:
-            self.head = new_node
-            self.tail = new_node 
         
-        else:
-            self.head.prev = new_node
-            new_node.next = self.head
-            self.head = new_node
+        for i in string_to_add:
+            self.contents.add_to_tail(i)
 
     
     def prepend(self, string_to_add):
         # reverse the incoming string to maintain correct 
         # order when adding to the front of the text buffer 
-        pass
+        a = string_to_add[::-1]
+        for i in a:
+            self.contents.add_to_head(i)
 
     def delete_front(self, chars_to_remove):
-        pass
+        for i in range(chars_to_remove):
+            self.contents.remove_from_head()
+        
 
     def delete_back(self, chars_to_remove):
-        pass
+        for i in range(chars_to_remove):
+            self.contents.remove_from_tail()
 
     """
     Join other_buffer to self
