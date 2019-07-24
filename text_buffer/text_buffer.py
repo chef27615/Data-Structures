@@ -53,14 +53,25 @@ class TextBuffer:
         # set self list tail's next node to be the head of the other buffer 
         
         # set other_buffer head's prev node to be the tail of this buffer
-        
-        pass
+        if(other_buffer.contents.length == 0):
+            print('ERROR: Other buffer is empty')
+            return
+        if isinstance(other_buffer, TextBuffer):
+            self.contents.tail.next = other_buffer.contents.head
+            other_buffer.contents.head.prev = self.contents.tail
+            self.contents.tail = other_buffer.contents.tail
+            self.contents.length += other_buffer.contents.length
+        else:
+            print('ERROR: argument is not a text buffer')
+            return
+            
         
     # if we get fed a string instead of a text buffer instance,
     # initialize a new text buffer with this string and then 
     # call the join method 
     def join_string(self, string_to_join):
-        pass
+        new_buffer = TextBuffer(string_to_join)
+        self.join(new_buffer)
 
 if __name__ == '__main__':
     text = TextBuffer("Super")
